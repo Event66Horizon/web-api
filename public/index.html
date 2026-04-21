@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NutriLens 3D: Diet, Disease, and Longevity</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Sora:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./plotly.min.js" defer></script>
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+    <div class="bg-grid"></div>
+
+    <main class="container">
+      <section class="hero glass">
+        <div>
+          <p class="kicker">Global Nutrition Intelligence</p>
+          <h1>NutriLens 3D Dashboard</h1>
+          <p class="subtitle">
+            Integrated open data view of food availability, obesity burden, cardiovascular deaths, and life expectancy.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="/docs/API_Documentation.pdf" target="_blank" rel="noreferrer">API Docs (PDF)</a>
+            <a class="button secondary" href="/api/v1" target="_blank" rel="noreferrer">API Root</a>
+          </div>
+        </div>
+        <div class="cube-wrap">
+          <div class="cube">
+            <span class="face front">Diet</span>
+            <span class="face back">Risk</span>
+            <span class="face right">CVD</span>
+            <span class="face left">Life</span>
+            <span class="face top">Data</span>
+            <span class="face bottom">Insight</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="controls glass">
+        <label>
+          Country focus
+          <select id="countrySelect"></select>
+        </label>
+        <label>
+          Risk filter
+          <select id="riskFilter">
+            <option value="all">All countries</option>
+            <option value="low">Lower risk only</option>
+            <option value="mid">Medium risk only</option>
+            <option value="high">Higher risk only</option>
+          </select>
+        </label>
+        <label>
+          Top-N ranking
+          <input id="topN" type="number" min="5" max="30" value="12" />
+        </label>
+      </section>
+
+      <section class="panel glass dashboard-error" id="dashboardError" aria-live="polite"></section>
+
+      <section class="metrics" id="metricCards"></section>
+
+      <section class="charts-two">
+        <article class="panel glass">
+          <h2>3D Diet-Risk-Longevity Space</h2>
+          <p class="panel-desc">X: fruit+vegetable supply, Y: obesity prevalence, Z: life expectancy, color: CVD deaths per 100k.</p>
+          <div id="scatter3d" class="chart"></div>
+        </article>
+        <article class="panel glass">
+          <h2>Country Profile Radar</h2>
+          <p class="panel-desc">Normalized profile for selected country across diet, risk, and longevity dimensions.</p>
+          <div id="radarChart" class="chart"></div>
+        </article>
+      </section>
+
+      <section class="charts-two">
+        <article class="panel glass">
+          <h2>Top Wellbeing Countries</h2>
+          <div id="rankingChart" class="chart"></div>
+        </article>
+        <article class="panel glass">
+          <h2>Correlation Heatmap</h2>
+          <div id="correlationChart" class="chart"></div>
+        </article>
+      </section>
+
+      <section class="insight-grid">
+        <article class="panel glass">
+          <h2>Selected Country Insight</h2>
+          <div id="selectedCountryDetail"></div>
+        </article>
+        <article class="panel glass">
+          <h2>Method Notes</h2>
+          <ul id="methodList"></ul>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
+
